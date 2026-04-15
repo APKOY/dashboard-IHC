@@ -226,7 +226,7 @@
         }
 
         /* =========================================
-           6. GRÁFICOS EM CSS PURO (Gráficos de Pizza)
+           6. GRÁFICOS EM CSS PURO E SVG
            ========================================= */
         .chart-section {
             margin-top: 40px;
@@ -234,6 +234,7 @@
             border-top: 1px dashed var(--border-color);
         }
 
+        /* Gráficos de Pizza */
         .pie-container {
             display: flex;
             align-items: center;
@@ -295,6 +296,36 @@
             border-radius: 50%;
             flex-shrink: 0;
         }
+
+        /* Gráfico de Linhas (NOVO) */
+        .line-chart-wrapper {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .line-chart-svg {
+            width: 100%;
+            height: 200px;
+            overflow: visible;
+        }
+
+        .chart-grid-line {
+            stroke: var(--border-color);
+            stroke-width: 1;
+            stroke-dasharray: 4; /* Cria o efeito de linha pontilhada */
+        }
+
+        .line-chart-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: var(--text-muted);
+            font-size: 0.85em;
+        }
     </style>
 </head>
 <body>
@@ -335,12 +366,11 @@
                 </div>
             </div>
 
-            <!-- NOVOS GRÁFICOS DE PIZZA MANTENDO A IDENTIDADE -->
+            <!-- GRÁFICOS DE PIZZA MANTENDO A IDENTIDADE -->
             <div class="chart-section">
                 <h3>Gráfico 1: Principais Dores Relatadas</h3>
                 <div class="mini-pies-grid">
                     <div class="mini-pie-card">
-                        <!-- Conic-gradient desenha as fatias da pizza baseadas nas percentagens -->
                         <div class="mini-pie" style="background: conic-gradient(#f59e0b 0% 85%, #222222 85% 100%);"></div>
                         <div>
                             <span style="display: block; font-weight: bold; font-size: 1.2em; color: #f59e0b;">85%</span>
@@ -404,6 +434,59 @@
                     </div>
                 </div>
             </div>
+
+            <!-- NOVO GRÁFICO DE LINHAS -->
+            <div class="chart-section" style="margin-top: 30px;">
+                <h3>Gráfico 4: Evolução da Procura vs. Disponibilidade (Últimos 6 meses)</h3>
+                
+                <div class="pie-legend" style="flex-direction: row; margin-top: 10px; margin-bottom: 10px;">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--primary); height: 4px;"></div>
+                        <span style="font-size: 0.85em;">Procura de Clientes</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--secondary); height: 4px;"></div>
+                        <span style="font-size: 0.85em;">Profissionais Disponíveis</span>
+                    </div>
+                </div>
+
+                <div class="line-chart-wrapper">
+                    <!-- SVG nativo do HTML para desenhar o gráfico de linhas -->
+                    <svg class="line-chart-svg" viewBox="0 0 600 200" preserveAspectRatio="none">
+                        <!-- Linhas de Grelha ao Fundo -->
+                        <line x1="0" y1="0" x2="600" y2="0" class="chart-grid-line" />
+                        <line x1="0" y1="50" x2="600" y2="50" class="chart-grid-line" />
+                        <line x1="0" y1="100" x2="600" y2="100" class="chart-grid-line" />
+                        <line x1="0" y1="150" x2="600" y2="150" class="chart-grid-line" />
+                        <line x1="0" y1="200" x2="600" y2="200" class="chart-grid-line" />
+
+                        <!-- Linha 1 (Secundária - Oferta/Disponibilidade) -->
+                        <polyline
+                            fill="none"
+                            stroke="var(--secondary)"
+                            stroke-width="4"
+                            points="0,170 120,150 240,160 360,110 480,130 600,100"
+                        />
+                        
+                        <!-- Linha 2 (Primária - Procura/Clientes) -->
+                        <polyline
+                            fill="none"
+                            stroke="var(--primary)"
+                            stroke-width="4"
+                            points="0,120 120,80 240,60 360,90 480,40 600,20"
+                        />
+                    </svg>
+                    <!-- Eixo X (Meses) -->
+                    <div class="line-chart-labels">
+                        <span>Jan</span>
+                        <span>Fev</span>
+                        <span>Mar</span>
+                        <span>Abr</span>
+                        <span>Mai</span>
+                        <span>Jun</span>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- SEÇÃO COM FORMULÁRIO COMPLETO -->
@@ -423,9 +506,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="senha">Chave de Acesso (Simulação de Password):</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite a chave da equipa" required>
+                </div>
+
+                <div class="form-group">
                     <label for="relatorio">Principais Dores Relatadas (Observações):</label>
                     <textarea id="relatorio" name="relatorio" rows="5" placeholder="Descreva os problemas relatados (ex: calote, desmarcação...)" required></textarea>
-                </div> 
+                </div>
 
                 <button type="submit">Enviar Dados da Pesquisa</button>
             </form>
