@@ -135,6 +135,28 @@
             font-size: 0.9em;
         }
 
+        /* Estilos interativos para os links de contato no Footer */
+        .footer-contato {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contato a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-contato a:hover, .footer-contato a:focus {
+            color: var(--primary);
+        }
+
         /* =========================================
            3. SELETORES DE CLASSE E ID
            ========================================= */
@@ -361,6 +383,7 @@
         <nav>
             <a href="#dashboard" data-audiodesc="Ir para a secção Visão Geral do Dashboard">Visão Geral</a>
             <a href="#contato" data-audiodesc="Ir para a secção do formulário Pesquisa de Campo">Pesquisa de Campo</a>
+            <a href="#rodape-contatos" data-audiodesc="Ir diretamente para o rodapé para informações de contato">Contato</a>
             
             <!-- Botão de Acessibilidade -->
             <button id="btnAcessibilidade" class="btn-acessibilidade" onclick="alternarAcessibilidade()" data-audiodesc="Ativar ou desativar o leitor de ecrã nativo" aria-label="Ativar Acessibilidade">
@@ -490,7 +513,7 @@
 
                 <div class="form-group">
                     <label for="senha">Chave de Acesso (Simulação de Password):</label>
-                    <input type="password" id="senha" name="senha" placeholder="Digite uma senha forte" required data-audiodesc="Campo de senha protegida. Digite a chave de acesso da equipa.">
+                    <input type="password" id="senha" name="senha" placeholder="Digite a chave da equipa" required data-audiodesc="Campo de senha protegida. Digite a chave de acesso da equipa.">
                 </div>
 
                 <div class="form-group">
@@ -504,9 +527,36 @@
     </main>
 
     <!-- RODAPÉ -->
-    <footer>
+    <footer id="rodape-contatos" tabindex="0" data-audiodesc="Rodapé com informações de desenvolvedor e links de contato interativos.">
         <p>Dashboard Avaliativo - IHC &copy; 2026</p>
         <p>Desenvolvido por: <strong style="color: var(--primary);">Alexsander Motta da Costa Ribeiro de Souza</strong></p>
+        
+        <!-- Links de Contato Interativos e Acessíveis -->
+        <div class="footer-contato">
+            <a href="mailto:alexsander.ribeiro.motta@gmail.com" target="_blank" tabindex="0" data-audiodesc="Link para enviar e-mail para Alexsander Ribeiro Motta">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                E-mail
+            </a>
+            
+            <a href="https://www.linkedin.com/in/alexsander-motta-da-costa-ribeiro-de-souza-012837314/" target="_blank" tabindex="0" data-audiodesc="Link para acessar o perfil no LinkedIn de Alexsander">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+                LinkedIn
+            </a>
+            
+            <a href="https://github.com/APKOY" target="_blank" tabindex="0" data-audiodesc="Link para acessar o repositório no GitHub de Alexsander">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                GitHub
+            </a>
+        </div>
     </footer>
 
     <!-- SCRIPT DA ACESSIBILIDADE E AUDIODESCRIÇÃO -->
@@ -537,7 +587,7 @@
 
             // Configura a nova voz
             const anuncio = new SpeechSynthesisUtterance(texto);
-            anuncio.lang = 'pt-PT'; // Tenta utilizar voz em português
+            anuncio.lang = 'pt-BR'; // Mudado para voz em Português do Brasil
             anuncio.rate = 1.0; // Velocidade de leitura normal
             
             synth.speak(anuncio);
